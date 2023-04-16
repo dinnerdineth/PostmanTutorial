@@ -1,0 +1,338 @@
+{
+	"info": {
+		"_postman_id": "a41c8384-3cac-4f5f-b481-a9948a92cad7",
+		"name": "Testing",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25889451"
+	},
+	"item": [
+		{
+			"name": "Endpoint Tutorial",
+			"item": [
+				{
+					"name": "Get Contact List",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "3.13.86.142:3000/contacts",
+							"host": [
+								"3",
+								"13",
+								"86",
+								"142"
+							],
+							"port": "3000",
+							"path": [
+								"contacts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Contact",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"pm.environment.set(\"contactID\", jsonData._id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"{{firstName}}\",\r\n    \"lastName\": \"{{lastName}}\",\r\n    \"email\": \"asmith@gmail.com\",\r\n    \"location\": {\r\n        \"City\": \"Boston, MA\",\r\n        \"country\": \"USA\"\r\n    },\r\n    \"employer\": {\r\n        \"jobTitle\": \"Tester\",\r\n        \"company\": \"Microsoft\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "3.13.86.142:3000/contacts",
+							"host": [
+								"3",
+								"13",
+								"86",
+								"142"
+							],
+							"port": "3000",
+							"path": [
+								"contacts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Contact",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "3.13.86.142:3000/contacts/64040b00fd15980f0d6cb70e",
+							"host": [
+								"3",
+								"13",
+								"86",
+								"142"
+							],
+							"port": "3000",
+							"path": [
+								"contacts",
+								"64040b00fd15980f0d6cb70e"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Contact",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"Amy\",\r\n    \"lastName\": \"Smith Jr\",\r\n    \"email\": \"asmith@gmail.com\",\r\n    \"location\": {\r\n        \"City\": \"Tampa, FL\",\r\n        \"country\": \"USA\"\r\n    },\r\n    \"employer\": {\r\n        \"jobTitle\": \"Tester\",\r\n        \"company\": \"Microsoft\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "3.13.86.142:3000/contacts/64040b00fd15980f0d6cb70e",
+							"host": [
+								"3",
+								"13",
+								"86",
+								"142"
+							],
+							"port": "3000",
+							"path": [
+								"contacts",
+								"64040b00fd15980f0d6cb70e"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Contact",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "3.13.86.142:3000/contacts/64040b00fd15980f0d6cb70e",
+							"host": [
+								"3",
+								"13",
+								"86",
+								"142"
+							],
+							"port": "3000",
+							"path": [
+								"contacts",
+								"64040b00fd15980f0d6cb70e"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Endpoint Negative Request Tutorial",
+			"item": [
+				{
+					"name": "Get Contact Not Found",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "3.13.86.142:3000/contacts/64040b00fd15980f0d6cb70e",
+							"host": [
+								"3",
+								"13",
+								"86",
+								"142"
+							],
+							"port": "3000",
+							"path": [
+								"contacts",
+								"64040b00fd15980f0d6cb70e"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Contact Missing First Name",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"\",\r\n    \"lastName\": \"Smith\",\r\n    \"email\": \"asmith@gmail.com\",\r\n    \"location\": {\r\n        \"City\": \"Boston, MA\",\r\n        \"country\": \"USA\"\r\n    },\r\n    \"employer\": {\r\n        \"jobTitle\": \"Tester\",\r\n        \"company\": \"Microsoft\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "3.13.86.142:3000/contacts",
+							"host": [
+								"3",
+								"13",
+								"86",
+								"142"
+							],
+							"port": "3000",
+							"path": [
+								"contacts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Contact Company Name Too Long",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"Amy\",\r\n    \"lastName\": \"Smith\",\r\n    \"email\": \"asmith@gmail.com\",\r\n    \"location\": {\r\n        \"City\": \"Boston, MA\",\r\n        \"country\": \"USA\"\r\n    },\r\n    \"employer\": {\r\n        \"jobTitle\": \"Tester\",\r\n        \"company\": \"asdasdasdasdasdasdasdasdasdasda\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "3.13.86.142:3000/contacts",
+							"host": [
+								"3",
+								"13",
+								"86",
+								"142"
+							],
+							"port": "3000",
+							"path": [
+								"contacts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Contact First Name Invalid Character",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"John2\",\r\n    \"lastName\": \"Smith\",\r\n    \"email\": \"asmith@gmail.com\",\r\n    \"location\": {\r\n        \"City\": \"Boston, MA\",\r\n        \"country\": \"USA\"\r\n    },\r\n    \"employer\": {\r\n        \"jobTitle\": \"Tester\",\r\n        \"company\": \"Microsoft\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "3.13.86.142:3000/contacts",
+							"host": [
+								"3",
+								"13",
+								"86",
+								"142"
+							],
+							"port": "3000",
+							"path": [
+								"contacts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Contact invalid email",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"John\",\r\n    \"lastName\": \"Smith\",\r\n    \"email\": \"asmith@com\",\r\n    \"location\": {\r\n        \"City\": \"Boston, MA\",\r\n        \"country\": \"USA\"\r\n    },\r\n    \"employer\": {\r\n        \"jobTitle\": \"Tester\",\r\n        \"company\": \"Microsoft\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "3.13.86.142:3000/contacts",
+							"host": [
+								"3",
+								"13",
+								"86",
+								"142"
+							],
+							"port": "3000",
+							"path": [
+								"contacts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Assertion error test",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Missing e-mail\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Email is required\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"\",\r\n    \"lastName\": \"Smith\",\r\n    \"email\": \"asmith@gmail.com\",\r\n    \"location\": {\r\n        \"City\": \"Boston, MA\",\r\n        \"country\": \"USA\"\r\n    },\r\n    \"employer\": {\r\n        \"jobTitle\": \"Tester\",\r\n        \"company\": \"Microsoft\"\r\n    }\r\n}"
+						},
+						"url": {
+							"raw": "3.13.86.142:3000/contacts",
+							"host": [
+								"3",
+								"13",
+								"86",
+								"142"
+							],
+							"port": "3000",
+							"path": [
+								"contacts"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
