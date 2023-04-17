@@ -1,0 +1,435 @@
+{
+	"info": {
+		"_postman_id": "9407bdfd-f1a3-4f5c-a20a-2fd23bb537b1",
+		"name": "Testing",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "25889451-9407bdfd-f1a3-4f5c-a20a-2fd23bb537b1"
+	},
+	"item": [
+		{
+			"name": "Endpoint Tutorial",
+			"item": [
+				{
+					"name": "Get Contact List",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "cc211c61-a0dc-4a5e-b566-5048f7aef6e7",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "85d7a1fd-f35a-4b91-ab1b-20be88995a4f",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "3.13.86.142:3000/contacts",
+							"host": [
+								"3",
+								"13",
+								"86",
+								"142"
+							],
+							"port": "3000",
+							"path": [
+								"contacts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Contact",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"pm.environment.set(\"contactID\", jsonData._id);"
+								],
+								"type": "text/javascript",
+								"id": "4008fd17-5769-4067-8e2f-d2a105d462f0"
+							}
+						}
+					],
+					"id": "847a98a0-12c0-4c0e-b9d3-2527e2f0d214",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"{{firstName}}\",\r\n    \"lastName\": \"{{lastName}}\",\r\n    \"email\": \"asmith@gmail.com\",\r\n    \"location\": {\r\n        \"City\": \"Boston, MA\",\r\n        \"country\": \"USA\"\r\n    },\r\n    \"employer\": {\r\n        \"jobTitle\": \"Tester\",\r\n        \"company\": \"Microsoft\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "3.13.86.142:3000/contacts",
+							"host": [
+								"3",
+								"13",
+								"86",
+								"142"
+							],
+							"port": "3000",
+							"path": [
+								"contacts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Contact",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3ed34771-6c8f-43d6-a200-9eccb9bb8ea4",
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Correct First Name Returned\", function () {\r",
+									"    pm.expect(jsonData.firstName).to.eql(environment.firstName);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Correct City Returned\", function () {\r",
+									"    pm.expect(jsonData.location.city).to.eql(environment.city);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "1723fc48-de3e-47dc-bd93-6445abf74705",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "3.13.86.142:3000/contacts/{{contactID}}",
+							"host": [
+								"3",
+								"13",
+								"86",
+								"142"
+							],
+							"port": "3000",
+							"path": [
+								"contacts",
+								"{{contactID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Contact",
+					"id": "35b10747-1e31-465c-875e-163c1c7b55ea",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"Amy\",\r\n    \"lastName\": \"Smith Jr\",\r\n    \"email\": \"asmith@gmail.com\",\r\n    \"location\": {\r\n        \"City\": \"Tampa, FL\",\r\n        \"country\": \"USA\"\r\n    },\r\n    \"employer\": {\r\n        \"jobTitle\": \"Tester\",\r\n        \"company\": \"Microsoft\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "3.13.86.142:3000/contacts/64040b00fd15980f0d6cb70e",
+							"host": [
+								"3",
+								"13",
+								"86",
+								"142"
+							],
+							"port": "3000",
+							"path": [
+								"contacts",
+								"64040b00fd15980f0d6cb70e"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Contact",
+					"id": "8a0d31c9-0e53-41b0-acb5-8cc10b05fe6d",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "3.13.86.142:3000/contacts/64040b00fd15980f0d6cb70e",
+							"host": [
+								"3",
+								"13",
+								"86",
+								"142"
+							],
+							"port": "3000",
+							"path": [
+								"contacts",
+								"64040b00fd15980f0d6cb70e"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "f29d4142-92c0-44bc-83f5-57273e9a53bb"
+		},
+		{
+			"name": "Endpoint Negative Request Tutorial",
+			"item": [
+				{
+					"name": "Get Contact Not Found",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "8099e6af-450c-48dc-89b9-100716394e1d",
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "5bc50127-800a-4a11-8b00-fc0c808dc0f9",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "3.13.86.142:3000/contacts/64040b00fd15980f0d6cb70e",
+							"host": [
+								"3",
+								"13",
+								"86",
+								"142"
+							],
+							"port": "3000",
+							"path": [
+								"contacts",
+								"64040b00fd15980f0d6cb70e"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Contact Missing First Name",
+					"id": "d91bca5a-d6fa-4958-b7a1-77b7b4bc1123",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"\",\r\n    \"lastName\": \"Smith\",\r\n    \"email\": \"asmith@gmail.com\",\r\n    \"location\": {\r\n        \"City\": \"Boston, MA\",\r\n        \"country\": \"USA\"\r\n    },\r\n    \"employer\": {\r\n        \"jobTitle\": \"Tester\",\r\n        \"company\": \"Microsoft\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "3.13.86.142:3000/contacts",
+							"host": [
+								"3",
+								"13",
+								"86",
+								"142"
+							],
+							"port": "3000",
+							"path": [
+								"contacts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Contact Company Name Too Long",
+					"id": "6c4328c1-949d-4dc0-939e-d50ce88e3478",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"Amy\",\r\n    \"lastName\": \"Smith\",\r\n    \"email\": \"asmith@gmail.com\",\r\n    \"location\": {\r\n        \"City\": \"Boston, MA\",\r\n        \"country\": \"USA\"\r\n    },\r\n    \"employer\": {\r\n        \"jobTitle\": \"Tester\",\r\n        \"company\": \"asdasdasdasdasdasdasdasdasdasda\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "3.13.86.142:3000/contacts",
+							"host": [
+								"3",
+								"13",
+								"86",
+								"142"
+							],
+							"port": "3000",
+							"path": [
+								"contacts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Contact First Name Invalid Character",
+					"id": "13417109-39f4-4ad9-a5c4-668f1f2440d1",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"John2\",\r\n    \"lastName\": \"Smith\",\r\n    \"email\": \"asmith@gmail.com\",\r\n    \"location\": {\r\n        \"City\": \"Boston, MA\",\r\n        \"country\": \"USA\"\r\n    },\r\n    \"employer\": {\r\n        \"jobTitle\": \"Tester\",\r\n        \"company\": \"Microsoft\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "3.13.86.142:3000/contacts",
+							"host": [
+								"3",
+								"13",
+								"86",
+								"142"
+							],
+							"port": "3000",
+							"path": [
+								"contacts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Contact invalid email",
+					"id": "f2adea7e-4764-4694-bce1-48f5f6cb4c0e",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"John\",\r\n    \"lastName\": \"Smith\",\r\n    \"email\": \"asmith@com\",\r\n    \"location\": {\r\n        \"City\": \"Boston, MA\",\r\n        \"country\": \"USA\"\r\n    },\r\n    \"employer\": {\r\n        \"jobTitle\": \"Tester\",\r\n        \"company\": \"Microsoft\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "3.13.86.142:3000/contacts",
+							"host": [
+								"3",
+								"13",
+								"86",
+								"142"
+							],
+							"port": "3000",
+							"path": [
+								"contacts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Assertion error test",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Missing e-mail\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Email is required\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"id": "768e7165-69ca-4e6e-9998-e4dc2495d32f"
+							}
+						}
+					],
+					"id": "c82ca2fa-196d-4d4f-a39f-f9a9a663d8ae",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"\",\r\n    \"lastName\": \"Smith\",\r\n    \"email\": \"asmith@gmail.com\",\r\n    \"location\": {\r\n        \"City\": \"Boston, MA\",\r\n        \"country\": \"USA\"\r\n    },\r\n    \"employer\": {\r\n        \"jobTitle\": \"Tester\",\r\n        \"company\": \"Microsoft\"\r\n    }\r\n}"
+						},
+						"url": {
+							"raw": "3.13.86.142:3000/contacts",
+							"host": [
+								"3",
+								"13",
+								"86",
+								"142"
+							],
+							"port": "3000",
+							"path": [
+								"contacts"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "441d008e-fd6a-4f71-b60c-074de89cf2e0"
+		}
+	]
+}
