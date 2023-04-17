@@ -126,7 +126,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "3.13.86.142:3000/contacts/{{contactID}}",
+							"raw": "3.13.86.142:3000/contacts/{{contactID}.",
 							"host": [
 								"3",
 								"13",
@@ -136,7 +136,7 @@
 							"port": "3000",
 							"path": [
 								"contacts",
-								"{{contactID}}"
+								"{{contactID}."
 							]
 						}
 					},
