@@ -75,6 +75,28 @@
 					],
 					"cookie": [],
 					"body": "{\n   \"owners\":[\n      {\n         \"id\":1,\n         \"name\":\"Amy\",\n         \"pets\":{\n            \"cats\":[\n               {\n                  \"name\":\"Fluffy\",\n                  \"age\":2,\n                  \"breed\":\"Persian\"\n               },\n               {\n                  \"name\":\"Mister Whiskers\",\n                  \"age\":4,\n                  \"breed\":\"Siamese\"\n               }\n            ],\n            \"dogs\":[\n               {\n                  \"name\":\"Spot\",\n                  \"age\":3,\n                  \"breed\":\"Labrador Retriever\"\n               }\n            ]\n         }\n      },\n      {\n         \"id\":2,\n         \"name\":\"Bob\",\n         \"pets\":{\n            \"cats\":[\n               {\n                  \"name\":\"Galadriel\",\n                  \"age\":2,\n                  \"breed\":\"Ragdoll\"\n               },\n               {\n                  \"name\":\"Gandalf\",\n                  \"age\":3,\n                  \"breed\":\"Ragdoll\"\n               }\n            ]\n         }\n      },\n      {\n         \"id\":3,\n         \"name\":\"Carol\",\n         \"pets\":{\n            \"cats\":[\n               {\n                  \"name\":\"D'Artagnan\",\n                  \"age\":5,\n                  \"breed\":\"Persian\"\n               }\n            ],\n            \"dogs\":[\n               {\n                  \"name\":\"Moe\",\n                  \"age\":3,\n                  \"breed\":\"Border Collie\"\n               },\n               {\n                  \"name\":\"Fred\",\n                  \"age\":3,\n                  \"breed\":\"Shih Tzu\"\n               },\n               {\n                  \"name\":\"Penelope\",\n                  \"age\":4,\n                  \"breed\":\"Great Dane\"\n               }\n            ]\n         }\n      }\n   ]\n}"
+				},
+				{
+					"id": "014a1a32-b70a-4cc9-b515-46d767a2e11c",
+					"name": "Get Pet Owners",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://98f2c9ce-fa98-4bd1-ac26-3da85ea67799.mock.pstmn.io/owners",
+							"protocol": "https",
+							"host": [
+								"98f2c9ce-fa98-4bd1-ac26-3da85ea67799",
+								"mock",
+								"pstmn",
+								"io"
+							],
+							"path": [
+								"owners"
+							]
+						}
+					},
+					"cookie": []
 				}
 			]
 		},
